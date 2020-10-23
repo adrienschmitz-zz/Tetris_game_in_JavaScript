@@ -129,6 +129,7 @@ function playerDrop() {
         merge(arena, player);
         playerReset();
         arenaSweep();
+        updateScore();
     }
     dropCounter = 0
 }
@@ -180,11 +181,12 @@ function rotate(matrix, dir) {
                 matrix[x][y],
             ];
         }
-        if (dir > 0) {
-            matrix.forEach(row => row.reverse());
-        } else {
-            matrix.reverse();
-        }
+    }
+
+    if (dir > 0) {
+        matrix.forEach(row => row.reverse());
+    } else {
+        matrix.reverse();
     }
 }
 
@@ -205,6 +207,10 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
+function updateScore() {
+    document.getElementById('score').innerText = player.score
+}
+
 const colors = [
     null,
     '#FF0D72',
@@ -220,10 +226,11 @@ const arena = createMatrix(12, 20);
 
 const player = {
     pos: {
-        x: 5,
-        y: 5
+        x: 0,
+        y: 0
     },
-    matrix: createPiece('T')
+    matrix: null,
+    score: 0,
 }
 
 document.addEventListener('keydown', event => {
@@ -240,4 +247,6 @@ document.addEventListener('keydown', event => {
     }
 })
 
+updateScore();
+playerReset();
 update();
