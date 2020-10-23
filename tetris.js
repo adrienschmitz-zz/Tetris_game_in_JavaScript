@@ -86,7 +86,7 @@ function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
-                context.fillStyle = 'red'
+                context.fillStyle = colors[value]
                 context.fillRect(x + offset.x, y + offset.y, 1, 1);
             }
         })
@@ -122,12 +122,15 @@ function playerMove(dir) {
 }
 
 function playerReset() {
-    const pieces = 'ILJOTSZ';
-    player.matrix = createPiece(pieces.length * Math.random() | 0);
+    const pieces = 'TJLOSZI';
+    player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
     player.pos.y = 0;
-    player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+    player.pos.x = (arena[0].length / 2 | 0) -
+        (player.matrix[0].length / 2 | 0);
     if (collide(arena, player)) {
-        arena.forEach(row.fill(0));
+        arena.forEach(row => row.fill(0));
+        player.score = 0;
+        updateScore();
     }
 }
 
@@ -183,7 +186,16 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
-const colors = [null, 'red', 'blue', 'violet', 'green', 'purple', 'orange', 'pink']
+const colors = [
+    null,
+    '#FF0D72',
+    '#0DC2FF',
+    '#0DFF72',
+    '#F538FF',
+    '#FF8E0D',
+    '#FFE138',
+    '#3877FF',
+];
 
 const arena = createMatrix(12, 20);
 
