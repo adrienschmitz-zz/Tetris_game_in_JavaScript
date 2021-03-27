@@ -23,7 +23,7 @@
 - Start Apache server in XAMPP
 - In your broswer visit: localhost/Tetris_game_in_JavaScript/
 - Controls: 
-    Use arrows to position the piece and 'w' to rotate
+    Use the arrows keys to position the piece and 'w' to rotate
 
 
 <b>Technologies:</b>
